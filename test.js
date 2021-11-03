@@ -8,8 +8,8 @@ test("isArray", ({ eq }) => {
 
 test("hasNext", ({ eq }) => {
   eq(hasNext([][Symbol.iterator]()), true);
-  eq(hasNext({next: null}), false);
-  eq(hasNext({next: () => ({})}), true);
+  eq(hasNext({ next: null }), false);
+  eq(hasNext({ next: () => ({}) }), true);
 });
 
 test("array iteration", ({ eq }) => {
