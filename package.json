@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Fun with Iterables",
   "main": "index.js",
-  "type": "module",
   "files": [
     "index.js"
   ],

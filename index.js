@@ -1,4 +1,4 @@
-export function isArray(data) {
+function isArray(data) {
   try {
     return data.constructor.name.endsWith("Array");
   } catch {
@@ -6,7 +6,7 @@ export function isArray(data) {
   }
 }
 
-export function hasNext(data) {
+function hasNext(data) {
   try {
     return typeof data.next === "function";
   } catch {
@@ -14,7 +14,7 @@ export function hasNext(data) {
   }
 }
 
-export function hasIterator(data) {
+function hasIterator(data) {
   try {
     return "@@iterator" in data;
   } catch {
@@ -22,7 +22,7 @@ export function hasIterator(data) {
   }
 }
 
-export function hasSymbolIterator(data) {
+function hasSymbolIterator(data) {
   try {
     return Symbol.iterator in data.constructor.prototype;
   } catch {
@@ -30,7 +30,7 @@ export function hasSymbolIterator(data) {
   }
 }
 
-export function getIterator(data) {
+function getIterator(data) {
   const iter = data["@@iterator"];
   if (hasNext(iter)) {
     return iter;
@@ -39,7 +39,7 @@ export function getIterator(data) {
   }
 }
 
-export function createIterator(data) {
+function createIterator(data) {
   let i = 0;
   let len = data.length;
   return {
@@ -47,7 +47,7 @@ export function createIterator(data) {
   };
 }
 
-export function getOrCreateIterator(data) {
+function getOrCreateIterator(data) {
   if (hasNext(data)) {
     return data;
   } else if (hasSymbolIterator(data)) {
@@ -59,4 +59,16 @@ export function getOrCreateIterator(data) {
   } else {
     throw "[iter-fun] unable to determine iterator";
   }
+}
+
+if (typeof module === "object") {
+  module.exports = {
+    isArray,
+    hasNext,
+    hasSymbolIterator,
+    hasIterator,
+    getIterator,
+    createIterator,
+    getOrCreateIterator
+  };
 }

@@ -1,5 +1,5 @@
-import test from "flug";
-import { getOrCreateIterator } from "./index.js";
+const test = require("flug");
+const { getOrCreateIterator } = require("./index.js");
 
 test("array iteration", ({ eq }) => {
   const data = [1, 2, 3, 4];
