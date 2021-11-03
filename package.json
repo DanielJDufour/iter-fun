@@ -4,6 +4,9 @@
   "description": "Fun with Iterables",
   "main": "index.js",
   "type": "module",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "format": "npx prettier --arrow-parens=avoid --trailing-comma=none --write *.js",
     "test": "node test.js"
