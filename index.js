@@ -53,6 +53,18 @@ function hasSymbolIterator(data) {
   }
 }
 
+function isIterator(data) {
+  try {
+    return (
+      Symbol.iterator in data &&
+      typeof data.next === "function" &&
+      data.propertyIsEnumerable("next") === false
+    );
+  } catch {
+    return false;
+  }
+}
+
 function getIterator(data) {
   const iter = data["@@iterator"];
   if (hasNext(iter)) {
@@ -71,7 +83,9 @@ function createIterator(data) {
 }
 
 function getOrCreateIterator(data) {
-  if (hasSymbolIterator(data)) {
+  if (isIterator(data)) {
+    return data;
+  } else if (hasSymbolIterator(data)) {
     return data[Symbol.iterator]();
   } else if (hasNext(data)) {
     return wrapNextFunction(data.next);
@@ -88,6 +102,7 @@ if (typeof module === "object") {
   module.exports = {
     addSymbolIterator,
     addSymbolIteratorFallback,
+    isIterator,
     isArray,
     hasNext,
     hasSymbolIterator,

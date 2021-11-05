@@ -16,6 +16,9 @@ const iter = getOrCreateIterator(obj);
 import { isArray } from "iter-fun";
 isArray([1, 2, 3]); // true
 
+import { isIterator } from "iter-fun";
+isIterator([1, 2, 3][Symbol.iterator]()); // true
+
 import { hasNext } from "iter-fun";
 hasNext({ next: () => {...} }); // true
 
