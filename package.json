@@ -1,6 +1,6 @@
 {
   "name": "iter-fun",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Fun with Iterables",
   "main": "index.js",
   "files": [
