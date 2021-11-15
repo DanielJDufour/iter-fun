@@ -98,6 +98,24 @@ function getOrCreateIterator(data) {
   }
 }
 
+function zip(iters) {
+  // convert input to iters just in case
+  iters = iters.map(getOrCreateIterator);
+
+  return wrapNextFunction(function next() {
+    const values = iters.map(iter => iter.next());
+    // if they are all done, stop
+    if (values.every(({ done }) => done)) {
+      return { done: true };
+    } else {
+      return {
+        done: false,
+        value: values.map(({ value }) => value)
+      };
+    }
+  });
+}
+
 if (typeof module === "object") {
   module.exports = {
     addSymbolIterator,
@@ -110,6 +128,7 @@ if (typeof module === "object") {
     getIterator,
     createIterator,
     getOrCreateIterator,
-    wrapNextFunction
+    wrapNextFunction,
+    zip
   };
 }

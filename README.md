@@ -54,4 +54,13 @@ import { wrapNextFunction } from "iter-fun";
 const next = () => { ... };
 const iter = wrapNextFunction(next);
 // converts a next function into a fully functioning iterable
+
+import { zip } from "iter-fun";
+const zeros = [0, 0, 0, ...];
+const twos = [2, 2, 2, ...];
+const sixties = [60, 60, 60, ...];
+const iters = [zeros, twos, sixties];
+const zipped = zip(iters);
+zipped.next();
+// { done: false, value: [0, 2, 60] }
 ```

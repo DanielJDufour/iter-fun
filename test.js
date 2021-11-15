@@ -4,7 +4,8 @@ const {
   hasNext,
   isIterator,
   getOrCreateIterator,
-  wrapNextFunction
+  wrapNextFunction,
+  zip
 } = require("./index.js");
 
 test("isArray", ({ eq }) => {
@@ -82,4 +83,19 @@ test("for let", ({ eq }) => {
     results.push(n);
   }
   eq(results, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+});
+
+test("zip", ({ eq }) => {
+  const zeros = new Array(10).fill(0);
+  const ones = new Array(10).fill(1);
+  const zipped = Array.from(zip([zeros, ones]));
+  eq(zipped.length, 10);
+  zipped.every(it => eq(it, [0, 1]));
+
+  const tens = new Array(10).fill(10);
+  const elevens = new Array(11).fill(11);
+  const zipped2 = Array.from(zip([tens, elevens]));
+  eq(zipped2.length, 11);
+  zipped2.slice(0, 10).every(it => eq(it, [10, 11]));
+  eq(zipped2[zipped2.length - 1], [undefined, 11]);
 });
